@@ -1,5 +1,5 @@
 //
-//  FirstViewController.h
+//  homePageViewController.h
 //  JW
 //
 //  Created by Star Chen on 11/13/16.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FirstViewController : UIViewController
-
+@interface homePageViewController : UIViewController
 
 @end
-

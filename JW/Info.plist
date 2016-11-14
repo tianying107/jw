@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>Just Way</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -15,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>0.1</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
@@ -24,6 +26,14 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>SF-UI-Display-Bold.otfSF-UI-Display-Medium.otfSF-UI-Display-Regular.otfSF-UI-Display-Semibold.otfSF-UI-Display-Thin.otf</string>
+		<string>SF-UI-Display-Semibold.otf</string>
+		<string>SF-UI-Display-Medium.otf</string>
+		<string>SF-UI-Display-Regular.otf</string>
+		<string>SF-UI-Display-Thin.otf</string>
+	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
