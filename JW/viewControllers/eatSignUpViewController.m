@@ -17,7 +17,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    infoSummary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"", @"phone", @"", @"code", nil];
+    infoSummary = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"", @"email", nil];
     viewArray = [NSMutableArray new];
     cardArray = [NSMutableArray new];
     goSuscard *baseView = [[goSuscard alloc] initWithFullSize];
@@ -42,7 +42,7 @@
     [baseView addSubview:confirmButton];
     
     goSignUpPhone *firstPage = [[goSignUpPhone alloc] initWithFrame:self.view.frame];
-    [firstPage contentWithPhone:[infoSummary valueForKey:@"phone"] code:[infoSummary valueForKey:@"code"] english:NO];
+    [firstPage contentWithPhone:[infoSummary valueForKey:@"email"] code:[infoSummary valueForKey:@"code"] english:NO];
     [viewArray addObject:firstPage];
     [baseView addGoSubview:firstPage];
 
@@ -54,7 +54,7 @@
 }
 - (void)phoneConfirm{
     [(goSignUpPhone*)[viewArray lastObject] complete];
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:((goSignUpPhone*)[viewArray lastObject]).phoneTextField.text, @"phone",((goSignUpPhone*)[viewArray lastObject]).codeTextField.text, @"code", nil];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:((goSignUpPhone*)[viewArray lastObject]).emailTextField.text, @"email", nil];
     [infoSummary addEntriesFromDictionary:dict];
     /****BASE VIEW****/
     goSuscard *baseView = [[goSuscard alloc] initWithFullSize];
@@ -99,11 +99,11 @@
     }
 }
 - (void)submit{
-    NSString *requestBody = [NSString stringWithFormat:@"id=%@&password=%@&type=buyer",[infoSummary valueForKey:@"phone"],[infoSummary valueForKey:@"password"]];
+    NSString *requestBody = [NSString stringWithFormat:@"email=%@&password=%@&type=buyer&action=register",[infoSummary valueForKey:@"email"],[infoSummary valueForKey:@"password"]];
     
     
     /*改上面的 query 和 URLstring 就好了*/
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@newperson",basicURL]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@register",basicURL]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     request.HTTPMethod = @"POST";
     request.HTTPBody = [requestBody dataUsingEncoding:NSUTF8StringEncoding];
@@ -111,51 +111,35 @@
     NSURLSessionTask *task = [session dataTaskWithRequest:request
                                         completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                             NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                                            NSLog(@"server said: %@",string);
                                             
+                                           
+                                             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data
+                                                                            options:kNilOptions
+                                                                              error:&error];
+                                             NSLog(@"server said: %@",dict);
                                             dispatch_async(dispatch_get_main_queue(), ^{
-                                                [self handleSubmit:string];
+                                                [self handleSubmit:dict];
                                             });
                                         }];
     [task resume];
 }
-- (void)handleSubmit:(NSString*)string{
-    if ([string isEqualToString:@"success"]) {
+- (void)handleSubmit:(NSDictionary*)dict{
+    if ([[dict valueForKey:@"msg"] isEqualToString:@"An email has been sent to you. Please check it to verify your account."]) {
         for (goSuscard *baseView in cardArray){
             [baseView removeFromSuperview];
         }
-        NSDictionary *adminDict = [[NSDictionary alloc] initWithObjectsAndKeys:[infoSummary valueForKey:@"phone"],@"id",[infoSummary valueForKey:@"password"],@"password",@"0",@"status", nil];
+        NSDictionary *adminDict = [[NSDictionary alloc] initWithObjectsAndKeys:[[infoSummary valueForKey:@"email"] lowercaseString],@"id",[infoSummary valueForKey:@"password"],@"password",@"0",@"status", nil];
         NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
         [userDefault setObject:adminDict forKey:@"admin"];
-        
-        
-        NSDictionary *newDict = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"admin"];
-        NSLog(@"admin dict: %@",newDict);
-        
-        NSString *docPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)objectAtIndex:0];
-        NSString *fileName = @"Authorization";
-        NSString *filePath =[docPath stringByAppendingPathComponent:fileName];
-        if (![[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-            [[NSFileManager defaultManager]createFileAtPath:filePath contents:nil attributes:nil];
-        }
-        else{
-            NSError* error = nil;
-            [[NSFileManager defaultManager] removeItemAtPath:filePath error:&error];
-            [[NSFileManager defaultManager]createFileAtPath:filePath contents:nil attributes:nil];
-        }
-        NSFileHandle *fileHandle = [NSFileHandle fileHandleForWritingAtPath:filePath];
-        [fileHandle seekToEndOfFile];
-        [fileHandle writeData:[[infoSummary valueForKey:@"phone"] dataUsingEncoding:NSUTF8StringEncoding]];
-        [fileHandle closeFile];
         [NSTimer scheduledTimerWithTimeInterval:.06 target:self selector:@selector(jump) userInfo:NULL repeats:NO];
     }
-    else if([string isEqualToString:@"11000"]){
-        NSLog(@"duplicate");
+    else if([[dict valueForKey:@"msg"] isEqualToString:@"You have already signed up. Please check your email to verify your account."]){
+        NSLog(@"duplicate, not verified yet.");
     }
 }
 - (void) jump{
-    UITabBarController *viewController = (UITabBarController *)[[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"tabBarViewController"];
+    /*jump to verificationWarningPage*/
+    UIViewController *viewController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"verificationWarningPage"];
     [self presentViewController:viewController animated:YES completion:nil];
-    //    [self showViewController:viewController sender:self];
 }
 @end

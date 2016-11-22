@@ -54,7 +54,7 @@
 }
 - (void)phoneConfirm{
     [(goSignUpPhone*)[viewArray lastObject] complete];
-    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:((goSignUpPhone*)[viewArray lastObject]).phoneTextField.text, @"phone",((goSignUpPhone*)[viewArray lastObject]).codeTextField.text, @"code", nil];
+    NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:((goSignUpPhone*)[viewArray lastObject]).emailTextField.text, @"email", nil];
     [infoSummary addEntriesFromDictionary:dict];
     /****BASE VIEW****/
     goSuscard *baseView = [[goSuscard alloc] initWithFullSize];
@@ -99,7 +99,7 @@
     }
 }
 - (void)submit{
-    NSString *requestBody = [NSString stringWithFormat:@"id=%@&password=%@&type=seller",[infoSummary valueForKey:@"phone"],[infoSummary valueForKey:@"password"]];
+    NSString *requestBody = [NSString stringWithFormat:@"email=%@&password=%@&type=seller",[infoSummary valueForKey:@"email"],[infoSummary valueForKey:@"password"]];
     
     
     /*改上面的 query 和 URLstring 就好了*/

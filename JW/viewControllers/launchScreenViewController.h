@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Header.h"
+#import "welcomeViewController.h"
 @interface launchScreenViewController : UIViewController
 
 @end

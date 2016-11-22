@@ -10,16 +10,16 @@
 #import "Header.h"
 @class goSignUpPhone;
 @interface goSignUpPhone : UIView<UITextFieldDelegate>{
-    UILabel *phoneLabel;
-    UILabel *codeLabel;
-    BOOL requestCode;
+    UILabel *emailLabel;
+//    UILabel *codeLabel;
+//    BOOL requestCode;
     UIImageView *logoImageView;
     UIView *separator1;
-    UIView *separator2;
-    UIButton *verifyButton;
+//    UIView *separator2;
+//    UIButton *verifyButton;
 }
 - (void)contentWithPhone:(NSString*)phone code:(NSString*)code english:(BOOL)english;
 - (void)complete;
-@property UITextField *phoneTextField;
-@property UITextField *codeTextField;
+@property UITextField *emailTextField;
+//@property UITextField *codeTextField;
 @end

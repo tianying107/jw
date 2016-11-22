@@ -55,6 +55,13 @@
 		4459A69F1DD9261400579F0D /* eatSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4459A69E1DD9261400579F0D /* eatSignUpViewController.m */; };
 		4459A6A31DD9309700579F0D /* cookSignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4459A6A21DD9309700579F0D /* cookSignUpViewController.m */; };
 		4459A6A61DD94A0E00579F0D /* goCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4459A6A51DD94A0E00579F0D /* goCell.m */; };
+		44EC58E81DE01E2C00FBAB2B /* welcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44EC58E71DE01E2C00FBAB2B /* welcomeViewController.m */; };
+		44EC58EB1DE0D3A200FBAB2B /* verificationWarningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44EC58EA1DE0D3A200FBAB2B /* verificationWarningViewController.m */; };
+		44EC58EE1DE1031C00FBAB2B /* accountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44EC58ED1DE1031C00FBAB2B /* accountViewController.m */; };
+		44EC58F41DE1116A00FBAB2B /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44EC58F01DE1116A00FBAB2B /* Bolts.framework */; };
+		44EC58F51DE1116A00FBAB2B /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44EC58F11DE1116A00FBAB2B /* FBSDKCoreKit.framework */; };
+		44EC58F61DE1116A00FBAB2B /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44EC58F21DE1116A00FBAB2B /* FBSDKLoginKit.framework */; };
+		44EC58F71DE1116A00FBAB2B /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44EC58F31DE1116A00FBAB2B /* FBSDKShareKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -166,6 +173,16 @@
 		4459A6A21DD9309700579F0D /* cookSignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = cookSignUpViewController.m; path = viewControllers/cookSignUpViewController.m; sourceTree = "<group>"; };
 		4459A6A41DD94A0E00579F0D /* goCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = goCell.h; path = Class/goCell/goCell.h; sourceTree = "<group>"; };
 		4459A6A51DD94A0E00579F0D /* goCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = goCell.m; path = Class/goCell/goCell.m; sourceTree = "<group>"; };
+		44EC58E61DE01E2C00FBAB2B /* welcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = welcomeViewController.h; path = viewControllers/welcomeViewController.h; sourceTree = "<group>"; };
+		44EC58E71DE01E2C00FBAB2B /* welcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = welcomeViewController.m; path = viewControllers/welcomeViewController.m; sourceTree = "<group>"; };
+		44EC58E91DE0D3A200FBAB2B /* verificationWarningViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = verificationWarningViewController.h; path = viewControllers/verificationWarningViewController.h; sourceTree = "<group>"; };
+		44EC58EA1DE0D3A200FBAB2B /* verificationWarningViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = verificationWarningViewController.m; path = viewControllers/verificationWarningViewController.m; sourceTree = "<group>"; };
+		44EC58EC1DE1031C00FBAB2B /* accountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = accountViewController.h; path = viewControllers/accountViewController.h; sourceTree = "<group>"; };
+		44EC58ED1DE1031C00FBAB2B /* accountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = accountViewController.m; path = viewControllers/accountViewController.m; sourceTree = "<group>"; };
+		44EC58F01DE1116A00FBAB2B /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = SDK/Bolts.framework; sourceTree = "<group>"; };
+		44EC58F11DE1116A00FBAB2B /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = SDK/FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		44EC58F21DE1116A00FBAB2B /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = SDK/FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		44EC58F31DE1116A00FBAB2B /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = SDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +190,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44EC58F71DE1116A00FBAB2B /* FBSDKShareKit.framework in Frameworks */,
+				44EC58F41DE1116A00FBAB2B /* Bolts.framework in Frameworks */,
+				44EC58F51DE1116A00FBAB2B /* FBSDKCoreKit.framework in Frameworks */,
+				44EC58F61DE1116A00FBAB2B /* FBSDKLoginKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,6 +237,7 @@
 		4459A5ED1DD8D77400579F0D /* JW */ = {
 			isa = PBXGroup;
 			children = (
+				44EC58F81DE1117100FBAB2B /* Framework */,
 				4459A6851DD8F49200579F0D /* textFont */,
 				4459A6241DD8DB0E00579F0D /* Class */,
 				4459A5F11DD8D77400579F0D /* AppDelegate.h */,
@@ -227,6 +249,7 @@
 				4459A6921DD90A6400579F0D /* launchScreenViewController.m */,
 				4459A6A01DD9261D00579F0D /* logInAndSignUp */,
 				4459A62D1DD8E13E00579F0D /* Discover */,
+				44EC58EF1DE1032200FBAB2B /* Account */,
 				4459A5FD1DD8D77400579F0D /* Assets.xcassets */,
 				4459A5FF1DD8D77400579F0D /* LaunchScreen.storyboard */,
 				4459A5EE1DD8D77400579F0D /* Supporting Files */,
@@ -418,12 +441,36 @@
 		4459A6A01DD9261D00579F0D /* logInAndSignUp */ = {
 			isa = PBXGroup;
 			children = (
+				44EC58E61DE01E2C00FBAB2B /* welcomeViewController.h */,
+				44EC58E71DE01E2C00FBAB2B /* welcomeViewController.m */,
 				4459A69D1DD9261400579F0D /* eatSignUpViewController.h */,
 				4459A69E1DD9261400579F0D /* eatSignUpViewController.m */,
 				4459A6A11DD9309700579F0D /* cookSignUpViewController.h */,
 				4459A6A21DD9309700579F0D /* cookSignUpViewController.m */,
+				44EC58E91DE0D3A200FBAB2B /* verificationWarningViewController.h */,
+				44EC58EA1DE0D3A200FBAB2B /* verificationWarningViewController.m */,
 			);
 			name = logInAndSignUp;
+			sourceTree = "<group>";
+		};
+		44EC58EF1DE1032200FBAB2B /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				44EC58EC1DE1031C00FBAB2B /* accountViewController.h */,
+				44EC58ED1DE1031C00FBAB2B /* accountViewController.m */,
+			);
+			name = Account;
+			sourceTree = "<group>";
+		};
+		44EC58F81DE1117100FBAB2B /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				44EC58F01DE1116A00FBAB2B /* Bolts.framework */,
+				44EC58F11DE1116A00FBAB2B /* FBSDKCoreKit.framework */,
+				44EC58F21DE1116A00FBAB2B /* FBSDKLoginKit.framework */,
+				44EC58F31DE1116A00FBAB2B /* FBSDKShareKit.framework */,
+			);
+			name = Framework;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -569,6 +616,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4459A5F91DD8D77400579F0D /* SecondViewController.m in Sources */,
+				44EC58EB1DE0D3A200FBAB2B /* verificationWarningViewController.m in Sources */,
 				4459A6601DD8F20100579F0D /* FSCalendarConstance.m in Sources */,
 				4459A65A1DD8F20100579F0D /* FSCalendar+Deprecated.m in Sources */,
 				4459A68C1DD8F81A00579F0D /* goTextField.m in Sources */,
@@ -589,6 +637,7 @@
 				4459A5F61DD8D77400579F0D /* shareListViewController.m in Sources */,
 				4459A6991DD9255300579F0D /* goSignUpPassword.m in Sources */,
 				4459A65D1DD8F20100579F0D /* FSCalendarAppearance.m in Sources */,
+				44EC58EE1DE1031C00FBAB2B /* accountViewController.m in Sources */,
 				4459A62C1DD8E13200579F0D /* homePageEditViewController.m in Sources */,
 				4459A5F01DD8D77400579F0D /* main.m in Sources */,
 				4459A6621DD8F20100579F0D /* FSCalendarFlowLayout.m in Sources */,
@@ -603,6 +652,7 @@
 				4459A6A31DD9309700579F0D /* cookSignUpViewController.m in Sources */,
 				4459A6631DD8F20100579F0D /* FSCalendarHeader.m in Sources */,
 				4459A6881DD8F72900579F0D /* goSuscard.m in Sources */,
+				44EC58E81DE01E2C00FBAB2B /* welcomeViewController.m in Sources */,
 				4459A65C1DD8F20100579F0D /* FSCalendarAnimator.m in Sources */,
 				4459A6701DD8F34D00579F0D /* NMRangeSlider.m in Sources */,
 			);
@@ -754,7 +804,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = T844TE94T5;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/JW/SDK",
+				);
 				INFOPLIST_FILE = JW/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = stn.JW;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -766,7 +821,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = T844TE94T5;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/JW/SDK",
+				);
 				INFOPLIST_FILE = JW/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = stn.JW;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -842,6 +902,7 @@
 				4459A61D1DD8D77500579F0D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4459A61E1DD8D77500579F0D /* Build configuration list for PBXNativeTarget "JWTests" */ = {
 			isa = XCConfigurationList;
@@ -850,6 +911,7 @@
 				4459A6201DD8D77500579F0D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4459A6211DD8D77500579F0D /* Build configuration list for PBXNativeTarget "JWUITests" */ = {
 			isa = XCConfigurationList;
@@ -858,6 +920,7 @@
 				4459A6231DD8D77500579F0D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

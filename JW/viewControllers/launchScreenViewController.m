@@ -7,10 +7,8 @@
 //
 
 #import "launchScreenViewController.h"
-
-@interface launchScreenViewController ()
-
-@end
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
 
 @implementation launchScreenViewController
 
@@ -19,21 +17,41 @@
     // Do any additional setup after loading the view.
 }
 - (void)viewDidAppear:(BOOL)animated{
-    if ([[NSUserDefaults standardUserDefaults] dictionaryForKey:@"admin"]) {
-        [self logInWithID:[[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"admin"] valueForKey:@"id"] password:[[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"admin"] valueForKey:@"password"]];
-    }
-    else{
-        UIViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"loginEntryNavi"];
+    if ([FBSDKAccessToken currentAccessToken]) {
+        [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me"
+                                           parameters:@{@"fields": @"name, picture, email"}]
+         startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+             if (!error) {
+                 NSString *email = [NSString stringWithFormat:@"%@",[result objectForKey:@"email"]];
+                 NSString *picurl = [NSString stringWithFormat:@"%@",[result objectForKey:@"picture"]];
+                 
+                 NSLog(@"email is %@", [result objectForKey:@"email"]);
+             }
+             else{
+                 NSLog(@"%@", [error localizedDescription]);
+             }
+         }];
+        NSLog(@"logged in!");
+        UITabBarController *viewController = (UITabBarController *)[[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"tabBarViewController"];
         [self presentViewController:viewController animated:YES completion:nil];
     }
+    else if ([[NSUserDefaults standardUserDefaults] dictionaryForKey:@"admin"]) {
+        [self logInWithID:[[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"admin"] valueForKey:@"id"] password:[[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"admin"] valueForKey:@"password"]];
+    }
+    else
+        [self goToWelcome];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (void)goToWelcome{
+    welcomeViewController *viewController = [self.storyboard instantiateViewControllerWithIdentifier:@"loginEntryNavi"];
+    [self presentViewController:viewController animated:YES completion:nil];
+}
 - (void)logInWithID:(NSString*)MEID password:(NSString*)password{
     if (!([MEID isEqualToString:@""]||[password isEqualToString:@""])) {
-        NSString *requestBody = [NSString stringWithFormat:@"id=%@&password=%@",MEID, password];
+        NSString *requestBody = [NSString stringWithFormat:@"email=%@&password=%@",MEID, password];
         NSLog(@"%@/n",requestBody);
         
         /*改上面的 query 和 URLstring 就好了*/
@@ -55,6 +73,8 @@
                                             }];
         [task resume];
     }
+    else
+        [self goToWelcome];
     
 }
 - (void)handleSubmit:(NSDictionary*)dictionary{
@@ -64,9 +84,12 @@
         [self presentViewController:viewController animated:YES completion:nil];
 //        [self updateToken:viewController idString:[[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"admin"] valueForKey:@"id"]];
     }
-    else{
-        NSLog(@"Authen FAILED");
+    else if ([[dictionary valueForKey:@"message"] isEqualToString:@"You've already registered, please verify your email!"]){
+        UIViewController *viewController = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"verificationWarningPage"];
+        [self presentViewController:viewController animated:YES completion:nil];
     }
+    else
+        [self goToWelcome];
 }
 - (void) updateToken:(UITabBarController*)viewController idString:(NSString*)idString;{
     NSString *docPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)objectAtIndex:0];

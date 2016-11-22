@@ -25,14 +25,8 @@
     [self.view insertSubview:effectView atIndex:50];
     
     
-    NSString *docPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)objectAtIndex:0];
-    NSString *fileName = @"stdAuthorization";
-    NSString *filePath =[docPath stringByAppendingPathComponent:fileName];
-    MEID = [[NSString alloc] init];
-    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-        NSError *error = nil;
-        MEID = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:&error];
-    }
+    
+    MEID = [[[NSUserDefaults standardUserDefaults] dictionaryForKey:@"admin"] valueForKey:@"id"];
     
     _orderSummary = [NSMutableDictionary dictionaryWithObjectsAndKeys:MEID, @"MEID", @"1", @"Repeat Times", nil];
     times = 1;
@@ -212,31 +206,7 @@
     seperator4.backgroundColor = goSeparator;
     [repeatBackgroundView addSubview:seperator4];
     
-    
-    /*
-     //极速推荐
-     quickMatchBackgroundView =[[UIView alloc] initWithFrame:CGRectMake(originX, heightCount, mainScrollView.frame.size.width-2*originX, 40)];
-     [mainScrollView addSubview:quickMatchBackgroundView];
-     UILabel *quickLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 10, 120, 20)];
-     quickLabel.text = @"goTalk极速推荐";
-     quickLabel.textColor = goColor1;
-     [quickLabel setFont:goFont15];
-     [quickMatchBackgroundView addSubview:quickLabel];
-     UISwitch *quickSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(quickMatchBackgroundView.frame.size.width-30-50, 5, 40, 30)];
-     [quickSwitch setOnTintColor:goColor4];
-     [quickSwitch addTarget:self action:@selector(quickSwitchResponse:) forControlEvents:UIControlEventValueChanged];
-     quickSwitch.tag = 9031;
-     [quickMatchBackgroundView addSubview:quickSwitch];
-     UILabel *quickNoteLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, quickMatchBackgroundView.frame.size.height, quickMatchBackgroundView.frame.size.width-30, 40)];
-     quickNoteLabel.text = @"goTalk会优先为您推荐最佳的候选人来满足您的需求。\n注：此选项未收费项目，选择会产生额外费用。";
-     quickNoteLabel.tag = 9032;
-     quickNoteLabel.numberOfLines = 0;
-     quickNoteLabel.textColor = goColor3;
-     [quickNoteLabel setFont:goFont13];
-     [quickMatchBackgroundView addSubview:quickNoteLabel];
-     */
-    
-    
+
     //price rate
     priceRateBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(originX, heightCount, mainScrollView.frame.size.width-2*originX, 1.7*height)];
     heightCount += priceRateBackgroundView.frame.size.height;
@@ -250,31 +220,7 @@
     goPriceSlider *priceSlider = [[goPriceSlider alloc] initWithFrame:CGRectMake(0, .5*height+30-6.5, priceRateBackgroundView.frame.size.width, 50) type:goPriceSliderSingle];
     priceSlider.delegate = self;
     [priceRateBackgroundView addSubview:priceSlider];
-    
-    /*
-     UIImageView *sliderTrackImageView = [[UIImageView alloc] initWithFrame:CGRectMake(15, .5*height+30+25-6.5, priceRateBackgroundView.frame.size.width-30, 13)];
-     sliderTrackImageView.image = [UIImage imageNamed:@"sliderTrackImage"];
-     [priceRateBackgroundView addSubview:sliderTrackImageView];
-     for (int i = 0; i<5; i++) {
-     UILabel *sliderIndicater = [[UILabel alloc] initWithFrame:CGRectMake(0, .7*height, 60, 20)];
-     sliderIndicater.text = [NSString stringWithFormat:@"%d",100+i*50];
-     sliderIndicater.textAlignment = NSTextAlignmentCenter;
-     sliderIndicater.textColor = goColor1;
-     [sliderIndicater setFont:[UIFont fontWithName:@"SFUIDisplay-Regular" size:10]];
-     sliderIndicater.center = CGPointMake(20+i*(sliderTrackImageView.frame.size.width-10)/4, sliderIndicater.center.y);
-     [priceRateBackgroundView addSubview:sliderIndicater];
-     }
-     UISlider *priceSlider = [[UISlider alloc] initWithFrame:CGRectMake(0, .5*height+30, priceRateBackgroundView.frame.size.width, 50)];
-     [priceRateBackgroundView addSubview:priceSlider];
-     [priceSlider setMinimumValue:100];
-     [priceSlider setMaximumValue:300];
-     [priceSlider setValue:200];
-     [priceSlider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
-     [priceSlider setThumbImage:[UIImage imageNamed:@"sliderThumbImage"] forState:UIControlStateNormal];
-     [priceSlider setMinimumTrackImage:[UIImage new] forState:UIControlStateNormal];
-     [priceSlider setMaximumTrackImage:[UIImage new] forState:UIControlStateNormal];
-     _priceString = [NSString stringWithFormat:@"%.f",priceSlider.value];
-     */
+
     _priceString = [NSString stringWithFormat:@"%ld",priceSlider.priceInteger];
     NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:_priceString, @"Hour Price", nil];
     [_orderSummary addEntriesFromDictionary:dict];
@@ -395,29 +341,6 @@
     [thirdPolicyLabel setFont:goFont13T];
     thirdPolicyLabel.numberOfLines = 0;
     [policyBackgroundView addSubview:thirdPolicyLabel];
-    
-    //    //submit
-    //    //price
-    //
-    //    submitButton = [[UIButton alloc] initWithFrame:CGRectMake(self.view.frame.size.width*.4, policyBackgroundView.frame.size.height+policyBackgroundView.frame.origin.y, self.view.frame.size.width*.6, 60)];
-    //    submitButton.backgroundColor = goColor5;
-    //    [submitButton setTitle:@"发布" forState:UIControlStateNormal];
-    //    [submitButton.titleLabel setFont:goFont18M];
-    //    [submitButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    //    [submitButton addTarget:self action:@selector(priceExpendResponse) forControlEvents:UIControlEventTouchUpInside];
-    //    [mainScrollView addSubview:submitButton];
-    //    priceBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, policyBackgroundView.frame.size.height+policyBackgroundView.frame.origin.y, self.view.frame.size.width*.4, 60)];
-    //    priceBackgroundView.clipsToBounds = YES;
-    //    priceBackgroundView.backgroundColor = goColor4;
-    //    CALayer *layer = priceBackgroundView.layer;
-    //    layer.masksToBounds = NO;
-    //    layer.shadowOffset = CGSizeMake(2, 0);
-    //    layer.shadowColor = [[UIColor grayColor] CGColor];
-    //    layer.shadowRadius = 1;
-    //    layer.shadowOpacity = .50f;
-    //    layer.shadowPath = [[UIBezierPath bezierPathWithRect:layer.bounds] CGPath];
-    //    [mainScrollView addSubview:priceBackgroundView];
-    
     
     
     [self originUpdate];
@@ -1504,4 +1427,38 @@
 //    [baseView addSubview:yesButton];
 }
 
+
+-(void)newShareSubmit{
+//    NSString *requestBody = [NSString stringWithFormat:@"cook_id=%@&share_type=%d&date=%@&start_time=%@&end_time=%@&hours=%@&share_price=%@&latitude=%@&longitude=%@&times=%@&category=%@,%@&message=%@&stage=%@&loc_name=%@",[_orderSummary objectForKey:@"MEID"],1,sendingDateString, [_orderSummary objectForKey:@"Starting Time"], endingTimeString, [_orderSummary objectForKey:@"Hours String"], _priceString,[_orderSummary objectForKey:@"Latitude"],[_orderSummary objectForKey:@"Longitude"],[_orderSummary objectForKey:@"Repeat Times"],[_orderSummary objectForKey:@"Category"],[_orderSummary objectForKey:@"Subcategory"], [_orderSummary objectForKey:@"Message"],[_orderSummary objectForKey:@"Stage"],[_orderSummary objectForKey:@"loc_name"]];
+    NSString *requestBody = @"";
+    NSLog(@"%@/n",requestBody);
+    
+    
+    /*改上面的 query 和 URLstring 就好了*/
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@newdish",basicURL]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    request.HTTPMethod = @"POST";
+    request.HTTPBody = [requestBody dataUsingEncoding:NSUTF8StringEncoding];
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionTask *task = [session dataTaskWithRequest:request
+                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                            NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                                            NSLog(@"server said: %@",string);
+                                            NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data
+                                                                                                options:kNilOptions error:&error];
+                                            dispatch_async(dispatch_get_main_queue(), ^{
+                                                UINavigationController * navigationController = self.navigationController;
+                                                [navigationController popToRootViewControllerAnimated:NO];
+                                                //                                                    [currentSuscard cancelResponse];
+                                                //                                                    /*show the comfirm at here*/
+                                                //                                                    [self orderDetailResponse:dic];
+                                                //                                                    orderPendingViewController *viewController = [[orderPendingViewController alloc] init];
+                                                //                                                    viewController.controllerType = goControllerSTD;
+                                                //                                                    viewController.hidesBottomBarWhenPushed = YES;
+                                                //                                                    [navigationController pushViewController:viewController animated:YES];
+                                            });
+                                        }];
+    [task resume];
+
+}
 @end
